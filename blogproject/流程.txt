@@ -1,0 +1,48 @@
+
+迁移数据库
+
+##**** python manage.py makemigrations
+##**** python manage.py migrate
+
+项目根目录（即 manage.py 文件所在目录）下建立一个名为templates 的文件夹
+用来存放我们的模板。然后在 templates\ 目录下建立一个名为 blog 的文件夹，用来存放和 blog 应用相关的模板
+
+在 settings.py 找到 TEMPLATES 选项，
+##****  其中 DIRS 就是设置模板的路径，在 [] 中写入 os.path.join(BASE_DIR, 'templates')
+
+处理静态文件
+在 static\ 目录下建立一个 blog 文件夹，把下载的博客模
+板中的 css 和 js 文件夹连同里面的全部文件一同拷贝进这个目录
+blog\
+ __init__.py
+ static\
+     blog\
+         css\
+            .css 文件...
+         js\
+            .js 文件
+
+CSS 样式文件的路径在 link 标签的 href 属性里，而 JavaScript 文件的路径在 script
+标签的 src 属性里。我们需要把它们改成正确的路径。把代码改成下面样子，正确地
+引入 static 文件下的 CSS 和 JavaScript 文件：
+
+{% load staticfiles %}
+...
+<link rel="stylesheet"href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<link rel="stylesheet" href="{% static'blog/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'blog/css/pace.css' %}">
+<link rel="stylesheet" href="{% static'blog/css/custom.css' %}">
+...
+
+用 {% %} 包裹起来的叫做模板标签
+
+
+
+
+
+
+
+
+
+
+
